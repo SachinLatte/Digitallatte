@@ -1,0 +1,33 @@
+
+RewriteEngine On
+
+RewriteBase /
+
+RewriteCond %{HTTP_HOST} ^[^.]+\.[^.]+$
+RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [L,R=301]
+
+# To internally redirect /dir/foo to /dir/foo.php
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php
+
+ErrorDocument 404 /404.php
+
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteCond %{HTTP_HOST} !^www\.               [NC]
+RewriteCond %{HTTP_HOST} ^([^.]+\.[a-z]{2,6})$ [NC]
+RewriteRule ^(.*)$       http://www.%1/$1      [R=301,L]
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*index\.php\ HTTP/
+RewriteRule ^(.*)index\.php$ /$1 [R=301,L]
+
+
+Redirect 301 /social-media-marketing /our-expertise/digital-marketing-services/Social-Media-Marketing
+Redirect 301 /website-design-development /our-expertise/Web-Development-Services
+Redirect 301 /digital-online-media-planning /our-expertise/digital-marketing-services/Digital-Media-Planning
+Redirect 301 /seo-search-engine-optimization /our-expertise/digital-marketing-services/Search-Engine-Optimization-SEO
+Redirect 301 /mobile-websites-applications /our-expertise/web-development-services/Mobile-Applications
+Redirect 301 /digital-marketing-work /best-digital-marketing-case-studies
+Redirect 301 /whats-fresh /digital-marketing-blog
+Redirect 301 /say-hello /Contact-Us

